@@ -18,6 +18,7 @@ import java.util.Optional;
 public interface OxidizableMixin {
 	/**
 	 * @author Shnupbups
+	 * @reason thonkjang
 	 */
 	@Overwrite
 	static Optional<Block> getDecreasedOxidationBlock(Block block) {
@@ -26,6 +27,7 @@ public interface OxidizableMixin {
 
 	/**
 	 * @author Shnupbups
+	 * @reason thonkjang
 	 */
 	@Overwrite
 	static Optional<Block> getIncreasedOxidationBlock(Block block) {
@@ -34,6 +36,7 @@ public interface OxidizableMixin {
 
 	/**
 	 * @author Shnupbups
+	 * @reason thonkjang
 	 */
 	@Overwrite
 	static Block getUnaffectedOxidationBlock(Block block) {

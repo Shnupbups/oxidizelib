@@ -19,6 +19,7 @@ public class HoneycombItemMixin {
 
 	/**
 	 * @author Shnupbups
+	 * @reason thonkjang
 	 */
 	@Overwrite
 	public static Optional<BlockState> getWaxedState(BlockState state) {
