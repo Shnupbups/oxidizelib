@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "oxidizelib",
+  "version": "${version}",
+
+  "name": "OxidizeLib",
+  "description": "A library that assists in making new Oxidizable blocks",
+  "authors": [
+    "Shnupbups"
+  ],
+
+  "license": "LGPLv3",
+  "icon": "assets/oxidizelib/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+  },
+  "mixins": ["oxidizelib.mixins.json"],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.shnupbups.oxidizelib.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": ["AxeItemMixin", "HoneycombItemMixin", "OxidizableMixin"],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
