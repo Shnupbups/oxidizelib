@@ -1,13 +1,13 @@
 package com.shnupbups.oxidizelib;
 
 import net.minecraft.block.Block;
-import static net.minecraft.block.Oxidizable.OxidizationLevel;
 
-import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 import java.util.HashMap;
 import java.util.Map;
+
+import static net.minecraft.block.Oxidizable.OxidizationLevel;
 
 public class OxidizableFamily {
 	private final ImmutableMap<OxidizationLevel, Block> unwaxed;

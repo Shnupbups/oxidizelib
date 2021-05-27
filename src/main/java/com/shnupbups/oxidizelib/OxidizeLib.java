@@ -1,10 +1,7 @@
 package com.shnupbups.oxidizelib;
 
-import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.Oxidizable;
 import net.minecraft.item.HoneycombItem;
 
@@ -12,7 +9,6 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Supplier;
 
