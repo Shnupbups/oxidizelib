@@ -14,8 +14,6 @@ minecraft {
 }
 
 repositories {
-	maven { url "https://maven.terraformersmc.com/"}
-	maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
@@ -27,15 +25,6 @@ dependencies {
 
     // Fabric Loader
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    // Fabric API
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fapi_version}"
-	
-	// ModMenu
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-	
-	// RoughlyEnoughItems
-    //modImplementation "me.shedaniel:RoughlyEnoughItems:${project.rei_version}"
 }
 
 java {
