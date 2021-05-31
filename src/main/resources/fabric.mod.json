@@ -14,6 +14,10 @@
 
   "environment": "*",
   "entrypoints": {
+    "rei": [
+      "com.shnupbups.oxidizelib.rei.OxidizePlugin",
+      "com.shnupbups.oxidizelib.rei.OxidizeClientPlugin"
+    ]
   },
   "mixins": ["oxidizelib.mixins.json"],
 
