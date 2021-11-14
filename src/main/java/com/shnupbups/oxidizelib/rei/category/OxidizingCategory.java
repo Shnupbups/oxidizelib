@@ -1,14 +1,13 @@
 package com.shnupbups.oxidizelib.rei.category;
 
 import java.util.List;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import com.shnupbups.oxidizelib.rei.OxidizePlugin;
-import com.shnupbups.oxidizelib.rei.display.OxidizingDisplay;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -17,6 +16,9 @@ import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+
+import com.shnupbups.oxidizelib.rei.OxidizePlugin;
+import com.shnupbups.oxidizelib.rei.display.OxidizingDisplay;
 
 public class OxidizingCategory implements DisplayCategory<OxidizingDisplay> {
 	@Override

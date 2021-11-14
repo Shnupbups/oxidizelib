@@ -1,41 +1,37 @@
 package com.shnupbups.oxidizelib.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import java.util.Optional;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Oxidizable;
 
-import com.shnupbups.oxidizelib.OxidizeLib;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Optional;
+import com.shnupbups.oxidizelib.OxidizeLib;
 
 @Mixin(Oxidizable.class)
 public interface OxidizableMixin {
-	/**
-	 * @author Shnupbups
-	 * @reason thonkjang
-	 */
-	@Overwrite
-	static Optional<Block> getDecreasedOxidationBlock(Block block) {
-		return OxidizeLib.getDecreasedOxidizationBlock(block);
+	@Inject(method = "getDecreasedOxidationBlock", at = @At("RETURN"), cancellable = true)
+	private static void getDecreasedOxidationBlockInject(Block block, CallbackInfoReturnable<Optional<Block>> cir) {
+		if(cir.getReturnValue().isEmpty()) {
+			cir.setReturnValue(OxidizeLib.getDecreasedOxidizationBlock(block));
+		}
 	}
 
-	/**
-	 * @author Shnupbups
-	 * @reason thonkjang
-	 */
-	@Overwrite
-	static Optional<Block> getIncreasedOxidationBlock(Block block) {
-		return OxidizeLib.getIncreasedOxidizationBlock(block);
+	@Inject(method = "getIncreasedOxidationBlock", at = @At("RETURN"), cancellable = true)
+	private static void getIncreasedOxidationBlockInject(Block block, CallbackInfoReturnable<Optional<Block>> cir) {
+		if(cir.getReturnValue().isEmpty()) {
+			cir.setReturnValue(OxidizeLib.getIncreasedOxidizationBlock(block));
+		}
 	}
 
-	/**
-	 * @author Shnupbups
-	 * @reason thonkjang
-	 */
-	@Overwrite
-	static Block getUnaffectedOxidationBlock(Block block) {
-		return OxidizeLib.getUnaffectedOxidizationBlock(block);
+	@Inject(method = "getUnaffectedOxidationBlock", at = @At("RETURN"), cancellable = true)
+	private static void getUnaffectedOxidationBlockInject(Block block, CallbackInfoReturnable<Block> cir) {
+		if(cir.getReturnValue().equals(block)) {
+			cir.setReturnValue(OxidizeLib.getUnaffectedOxidizationBlock(block));
+		}
 	}
 }

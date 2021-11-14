@@ -1,24 +1,23 @@
 package com.shnupbups.oxidizelib.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import java.util.Optional;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.item.HoneycombItem;
 
-import com.shnupbups.oxidizelib.OxidizeLib;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Optional;
+import com.shnupbups.oxidizelib.OxidizeLib;
 
 @Mixin(HoneycombItem.class)
 public class HoneycombItemMixin {
-
-	/**
-	 * @author Shnupbups
-	 * @reason thonkjang
-	 */
-	@Overwrite
-	public static Optional<BlockState> getWaxedState(BlockState state) {
-		return OxidizeLib.getWaxedState(state);
+	@Inject(method = "getWaxedState", at = @At("RETURN"), cancellable = true)
+	private static void getWaxedStateInject(BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
+		if(cir.getReturnValue().isEmpty()) {
+			cir.setReturnValue(OxidizeLib.getWaxedState(state));
+		}
 	}
 }

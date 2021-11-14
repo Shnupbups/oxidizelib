@@ -15,6 +15,13 @@ import net.minecraft.tag.TagGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
+import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
+import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import me.shedaniel.rei.api.common.util.EntryStacks;
+
 import com.shnupbups.oxidizelib.OxidizeLib;
 import com.shnupbups.oxidizelib.rei.category.OxidizingCategory;
 import com.shnupbups.oxidizelib.rei.category.ScrapingCategory;
@@ -22,12 +29,6 @@ import com.shnupbups.oxidizelib.rei.category.WaxingCategory;
 import com.shnupbups.oxidizelib.rei.display.OxidizingDisplay;
 import com.shnupbups.oxidizelib.rei.display.ScrapingDisplay;
 import com.shnupbups.oxidizelib.rei.display.WaxingDisplay;
-import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
-import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-import me.shedaniel.rei.api.common.util.EntryStacks;
 
 public class OxidizeClientPlugin implements REIClientPlugin {
 
