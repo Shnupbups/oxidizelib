@@ -25,6 +25,6 @@ public class AxeItemMixin {
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = world.getBlockState(pos);
-		return (Optional<T>) Optional.ofNullable((Block)((BiMap) HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get()).get(state.getBlock())).or(() -> OxidizeLib.getUnwaxedBlock(state.getBlock()));
+		return (Optional<T>) Optional.ofNullable((Block) ((BiMap) HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get()).get(state.getBlock())).or(() -> OxidizeLib.getUnwaxedBlock(state.getBlock()));
 	}
 }

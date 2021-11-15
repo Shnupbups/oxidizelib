@@ -16,7 +16,7 @@ import com.shnupbups.oxidizelib.OxidizeLib;
 public class HoneycombItemMixin {
 	@Inject(method = "getWaxedState", at = @At("RETURN"), cancellable = true)
 	private static void getWaxedStateInject(BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
-		if(cir.getReturnValue().isEmpty()) {
+		if (cir.getReturnValue().isEmpty()) {
 			cir.setReturnValue(OxidizeLib.getWaxedState(state));
 		}
 	}

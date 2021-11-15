@@ -19,6 +19,10 @@ public class ScrapingDisplay extends BasicDisplay {
 		super(inputs, outputs);
 	}
 
+	public static Serializer<ScrapingDisplay> serializer() {
+		return Serializer.ofSimpleRecipeLess(ScrapingDisplay::new);
+	}
+
 	public final EntryIngredient getIn() {
 		return getInputEntries().get(0);
 	}
@@ -30,9 +34,5 @@ public class ScrapingDisplay extends BasicDisplay {
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
 		return OxidizePlugin.SCRAPING;
-	}
-
-	public static Serializer<ScrapingDisplay> serializer() {
-		return Serializer.ofSimpleRecipeLess(ScrapingDisplay::new);
 	}
 }

@@ -3,52 +3,63 @@ package com.shnupbups.oxidizelib;
 import static net.minecraft.block.Oxidizable.OxidizationLevel;
 
 import java.util.HashMap;
-import java.util.Map;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.Oxidizable;
 
-public class OxidizableFamily {
-	private final ImmutableMap<OxidizationLevel, Block> unwaxed;
-	private final ImmutableMap<OxidizationLevel, Block> waxed;
+public record OxidizableFamily(
+		ImmutableMap<OxidizationLevel, Block> unwaxed,
+		ImmutableMap<OxidizationLevel, Block> waxed) {
+	private static final Logger LOGGER = LogManager.getLogger();
 
-	private OxidizableFamily(Map<OxidizationLevel, Block> unwaxed, Map<OxidizationLevel, Block> waxed) {
-		this.unwaxed = ImmutableMap.<OxidizationLevel, Block>builder().putAll(unwaxed).build();
-		this.waxed = ImmutableMap.<OxidizationLevel, Block>builder().putAll(waxed).build();
+	public Block unwaxed(OxidizationLevel level) {
+		return unwaxed().get(level);
 	}
 
-	public Block getUnwaxedForLevel(OxidizationLevel level) {
-		return unwaxed.get(level);
+	public Block waxed(OxidizationLevel level) {
+		return waxed().get(level);
 	}
 
-	public Block getWaxedForLevel(OxidizationLevel level) {
-		return waxed.get(level);
-	}
-
-	public ImmutableBiMap<Block, Block> getOxidizationLevelIncreasesMap() {
+	public BiMap<Block, Block> oxidizationLevelIncreasesMap() {
 		return ImmutableBiMap.<Block, Block>builder()
-				.put(getUnwaxedForLevel(OxidizationLevel.UNAFFECTED), getUnwaxedForLevel(OxidizationLevel.EXPOSED))
-				.put(getUnwaxedForLevel(OxidizationLevel.EXPOSED), getUnwaxedForLevel(OxidizationLevel.WEATHERED))
-				.put(getUnwaxedForLevel(OxidizationLevel.WEATHERED), getUnwaxedForLevel(OxidizationLevel.OXIDIZED))
+				.put(unwaxed(OxidizationLevel.UNAFFECTED), unwaxed(OxidizationLevel.EXPOSED))
+				.put(unwaxed(OxidizationLevel.EXPOSED), unwaxed(OxidizationLevel.WEATHERED))
+				.put(unwaxed(OxidizationLevel.WEATHERED), unwaxed(OxidizationLevel.OXIDIZED))
 				.build();
 	}
 
-	public ImmutableBiMap<Block, Block> getUnwaxedToWaxedMap() {
+	public BiMap<Block, Block> oxidizationLevelDecreasesMap() {
+		return oxidizationLevelIncreasesMap().inverse();
+	}
+
+	public BiMap<Block, Block> unwaxedToWaxedMap() {
 		return ImmutableBiMap.<Block, Block>builder()
-				.put(getUnwaxedForLevel(OxidizationLevel.UNAFFECTED), getWaxedForLevel(OxidizationLevel.UNAFFECTED))
-				.put(getUnwaxedForLevel(OxidizationLevel.EXPOSED), getWaxedForLevel(OxidizationLevel.EXPOSED))
-				.put(getUnwaxedForLevel(OxidizationLevel.WEATHERED), getWaxedForLevel(OxidizationLevel.WEATHERED))
-				.put(getUnwaxedForLevel(OxidizationLevel.OXIDIZED), getWaxedForLevel(OxidizationLevel.OXIDIZED))
+				.put(unwaxed(OxidizationLevel.UNAFFECTED), waxed(OxidizationLevel.UNAFFECTED))
+				.put(unwaxed(OxidizationLevel.EXPOSED), waxed(OxidizationLevel.EXPOSED))
+				.put(unwaxed(OxidizationLevel.WEATHERED), waxed(OxidizationLevel.WEATHERED))
+				.put(unwaxed(OxidizationLevel.OXIDIZED), waxed(OxidizationLevel.OXIDIZED))
 				.build();
+	}
+
+	public BiMap<Block, Block> waxedToUnwaxedMap() {
+		return unwaxedToWaxedMap().inverse();
 	}
 
 	public static class Builder {
 		private final HashMap<OxidizationLevel, Block> unwaxed = new HashMap<>();
 		private final HashMap<OxidizationLevel, Block> waxed = new HashMap<>();
 
-		private Builder add(OxidizationLevel level, Block unwaxed, Block waxed) {
+		public Builder add(OxidizationLevel level, Block unwaxed, Block waxed) {
+			if (!(unwaxed instanceof Oxidizable)) {
+				LOGGER.warn("Block " + unwaxed + " is not oxidizable, but added to OxidizableFamily as unwaxed block. This is likely an error!");
+			}
 			this.unwaxed.put(level, unwaxed);
 			this.waxed.put(level, waxed);
 			return this;
@@ -71,14 +82,15 @@ public class OxidizableFamily {
 		}
 
 		public OxidizableFamily build() {
-			for(OxidizationLevel level:OxidizationLevel.values()) {
-				if(!unwaxed.containsKey(level)) {
-					throw new IllegalStateException("OxidizableFamily is missing unwaxed variant for "+level);
-				} else if(!waxed.containsKey(level)) {
-					throw new IllegalStateException("OxidizableFamily is missing waxed variant for "+level);
+			for (OxidizationLevel level : OxidizationLevel.values()) {
+				if (!unwaxed.containsKey(level) || unwaxed.get(level) == null) {
+					throw new IllegalStateException("OxidizableFamily is missing unwaxed variant for " + level + "!");
+				}
+				if (!waxed.containsKey(level) || waxed.get(level) == null) {
+					throw new IllegalStateException("OxidizableFamily is missing waxed variant for " + level + "!");
 				}
 			}
-			return new OxidizableFamily(unwaxed, waxed);
+			return new OxidizableFamily(ImmutableMap.copyOf(unwaxed), ImmutableMap.copyOf(waxed));
 		}
 	}
 }

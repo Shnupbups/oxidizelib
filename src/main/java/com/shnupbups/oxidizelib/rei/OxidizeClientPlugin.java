@@ -60,16 +60,16 @@ public class OxidizeClientPlugin implements REIClientPlugin {
 
 	@Override
 	public void registerDisplays(DisplayRegistry registry) {
-		OxidizeLib.getUnwaxedToWaxed().get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		OxidizeLib.getUnwaxedToWaxedBlocks().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new WaxingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getWaxedToUnwaxed().get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		OxidizeLib.getWaxedToUnwaxedBlocks().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new ScrapingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getOxidizationLevelDecreases().get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		OxidizeLib.getOxidizationLevelDecreases().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new ScrapingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getOxidizationLevelIncreases().get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		OxidizeLib.getOxidizationLevelIncreases().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new OxidizingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
 	}

@@ -19,6 +19,10 @@ public class WaxingDisplay extends BasicDisplay {
 		super(inputs, outputs);
 	}
 
+	public static BasicDisplay.Serializer<WaxingDisplay> serializer() {
+		return BasicDisplay.Serializer.ofSimpleRecipeLess(WaxingDisplay::new);
+	}
+
 	public final EntryIngredient getIn() {
 		return getInputEntries().get(0);
 	}
@@ -30,9 +34,5 @@ public class WaxingDisplay extends BasicDisplay {
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
 		return OxidizePlugin.WAXING;
-	}
-
-	public static BasicDisplay.Serializer<WaxingDisplay> serializer() {
-		return BasicDisplay.Serializer.ofSimpleRecipeLess(WaxingDisplay::new);
 	}
 }

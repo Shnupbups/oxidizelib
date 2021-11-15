@@ -19,6 +19,10 @@ public class OxidizingDisplay extends BasicDisplay {
 		super(inputs, outputs);
 	}
 
+	public static Serializer<OxidizingDisplay> serializer() {
+		return Serializer.ofSimpleRecipeLess(OxidizingDisplay::new);
+	}
+
 	public final EntryIngredient getIn() {
 		return getInputEntries().get(0);
 	}
@@ -30,9 +34,5 @@ public class OxidizingDisplay extends BasicDisplay {
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
 		return OxidizePlugin.OXIDIZING;
-	}
-
-	public static Serializer<OxidizingDisplay> serializer() {
-		return Serializer.ofSimpleRecipeLess(OxidizingDisplay::new);
 	}
 }

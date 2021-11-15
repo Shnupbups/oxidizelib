@@ -16,21 +16,21 @@ import com.shnupbups.oxidizelib.OxidizeLib;
 public interface OxidizableMixin {
 	@Inject(method = "getDecreasedOxidationBlock", at = @At("RETURN"), cancellable = true)
 	private static void getDecreasedOxidationBlockInject(Block block, CallbackInfoReturnable<Optional<Block>> cir) {
-		if(cir.getReturnValue().isEmpty()) {
+		if (cir.getReturnValue().isEmpty()) {
 			cir.setReturnValue(OxidizeLib.getDecreasedOxidizationBlock(block));
 		}
 	}
 
 	@Inject(method = "getIncreasedOxidationBlock", at = @At("RETURN"), cancellable = true)
 	private static void getIncreasedOxidationBlockInject(Block block, CallbackInfoReturnable<Optional<Block>> cir) {
-		if(cir.getReturnValue().isEmpty()) {
+		if (cir.getReturnValue().isEmpty()) {
 			cir.setReturnValue(OxidizeLib.getIncreasedOxidizationBlock(block));
 		}
 	}
 
 	@Inject(method = "getUnaffectedOxidationBlock", at = @At("RETURN"), cancellable = true)
 	private static void getUnaffectedOxidationBlockInject(Block block, CallbackInfoReturnable<Block> cir) {
-		if(cir.getReturnValue().equals(block)) {
+		if (cir.getReturnValue().equals(block)) {
 			cir.setReturnValue(OxidizeLib.getUnaffectedOxidizationBlock(block));
 		}
 	}
