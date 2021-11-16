@@ -5,11 +5,9 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
+import net.minecraft.block.Oxidizable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.tag.Tag;
 import net.minecraft.tag.TagGroup;
 import net.minecraft.util.Identifier;
@@ -22,7 +20,6 @@ import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 
-import com.shnupbups.oxidizelib.OxidizeLib;
 import com.shnupbups.oxidizelib.rei.category.OxidizingCategory;
 import com.shnupbups.oxidizelib.rei.category.ScrapingCategory;
 import com.shnupbups.oxidizelib.rei.category.WaxingCategory;
@@ -60,16 +57,16 @@ public class OxidizeClientPlugin implements REIClientPlugin {
 
 	@Override
 	public void registerDisplays(DisplayRegistry registry) {
-		OxidizeLib.getUnwaxedToWaxedBlocks().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		HoneycombItem.UNWAXED_TO_WAXED_BLOCKS.get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new WaxingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getWaxedToUnwaxedBlocks().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		HoneycombItem.WAXED_TO_UNWAXED_BLOCKS.get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new ScrapingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getOxidizationLevelDecreases().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		Oxidizable.OXIDATION_LEVEL_DECREASES.get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new ScrapingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
-		OxidizeLib.getOxidizationLevelIncreases().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
+		Oxidizable.OXIDATION_LEVEL_INCREASES.get().entrySet().stream().sorted(Comparator.comparing(b -> Registry.BLOCK.getId(b.getKey()))).forEach(set -> {
 			registry.add(new OxidizingDisplay(EntryStacks.of(set.getKey()), EntryStacks.of(set.getValue())));
 		});
 	}

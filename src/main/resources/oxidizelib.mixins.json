@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.shnupbups.oxidizelib.mixin",
   "compatibilityLevel": "JAVA_16",
-  "mixins": ["AxeItemMixin", "HoneycombItemMixin", "OxidizableMixin"],
+  "mixins": ["HoneycombItemMixin", "OxidizableMixin"],
   "client": [
   ],
   "injectors": {

@@ -17,6 +17,9 @@
     "rei": [
       "com.shnupbups.oxidizelib.rei.OxidizePlugin",
       "com.shnupbups.oxidizelib.rei.OxidizeClientPlugin"
+    ],
+    "main": [
+      "com.shnupbups.oxidizelib.Tester"
     ]
   },
   "mixins": ["oxidizelib.mixins.json"],
